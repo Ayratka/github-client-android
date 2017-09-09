@@ -3,6 +3,7 @@ package github.maxat.com.githubclient.presentation.presenter;
 import android.os.Handler;
 import android.util.Log;
 
+import github.maxat.com.githubclient.R;
 import github.maxat.com.githubclient.domain.interactor.Login;
 import github.maxat.com.githubclient.presentation.view.kinds.BaseDataView;
 import github.maxat.com.githubclient.presentation.view.kinds.LoginDataView;
@@ -44,7 +45,10 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 	public void actionLogin(String strLogin, String strPass) {
 
 		Login login  = new Login (AndroidSchedulers.mainThread (), Schedulers.io ());
-		login.execute ( isSuccess -> {}, throwable -> {}, null);
+		login.execute (
+				isSuccess -> {  },
+				isBad -> {	loginDataView.showMessage(R.string.error_login_or_pass); },
+				null);
 	}
 
 

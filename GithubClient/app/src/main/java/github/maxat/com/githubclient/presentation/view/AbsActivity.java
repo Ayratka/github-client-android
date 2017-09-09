@@ -1,5 +1,6 @@
 package github.maxat.com.githubclient.presentation.view;
 
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -13,5 +14,10 @@ public abstract class AbsActivity extends AppCompatActivity implements BaseDataV
 	@Override
 	public void showMessage(String message) {
 		Toast.makeText (this, message, Toast.LENGTH_SHORT).show ();
+	}
+
+	@Override
+	public void showMessage(@StringRes int messageRes) {
+		this.showMessage( getString(messageRes)) ;
 	}
 }

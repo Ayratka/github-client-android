@@ -17,11 +17,6 @@ import rx.Observable;
 public interface RestApi {
 
 
-
-//	@POST("commands.json")
-//	Observable<List<Object>> postCommandsDebug(@QueryMap Map<String, String> maps, @Body BodyCommands commands);
-
-
 	@GET("mobile/get_user_details.json")
 	Observable<AccessorEntity> getAccessorEntity(@QueryMap Map<String, String> options);
 }

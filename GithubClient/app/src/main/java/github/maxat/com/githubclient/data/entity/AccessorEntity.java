@@ -1,26 +1,26 @@
 package github.maxat.com.githubclient.data.entity;
 
+import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by ayrat on 08.09.17.
  */
-public class AccessorEntity {
+public class AccessorEntity extends RealmObject {
 
 
+	@PrimaryKey
 	long id;
-
-	String url;
-
-	Object app;
 
 	String token;
 
 	String hashed_token;
 
-	String token_last_eight;
-
 	String note;
 
 	String note_url;
+
 
 
 }
