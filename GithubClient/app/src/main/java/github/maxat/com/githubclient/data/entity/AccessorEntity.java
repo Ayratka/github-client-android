@@ -1,6 +1,7 @@
 package github.maxat.com.githubclient.data.entity;
 
 import io.realm.Realm;
+import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 

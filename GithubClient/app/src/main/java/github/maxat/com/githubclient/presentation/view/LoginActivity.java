@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 
 import butterknife.BindView;
@@ -29,7 +30,7 @@ public class LoginActivity extends AbsActivity implements LoginDataView {
 	AppCompatEditText editPass;
 
 	@BindView (R.id.btnOk)
-	AppCompatEditText btnOk;
+	AppCompatButton btnOk;
 
 
 
@@ -37,18 +38,17 @@ public class LoginActivity extends AbsActivity implements LoginDataView {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView (R.layout.activity_login);
-		ButterKnife.bind (this);
-		loginPresenter = new LoginPresenter (this);
+		ButterKnife.bind(this);
+		loginPresenter = new LoginPresenter (getBaseContext(), this);
 	}
 
-
-
 	@OnClick(R.id.btnOk)
-	protected void onClickLogin(){
+	public void onClickLogin() {
 		final String login = editLogin.getText ().toString ();
 		final String pass = editPass.getText ().toString ();
 		loginPresenter.actionLogin(login, pass);
 	}
+
 
 	@Override
 	protected void onResume() {

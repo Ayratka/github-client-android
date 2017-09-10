@@ -17,8 +17,12 @@ import rx.Observable;
 public interface RestApi {
 
 
-	@GET("authorizations")
-	Observable<AccessorEntity> getAccessorEntity(@QueryMap Map<String, String> options);
+	@POST("authorizations")
+	Observable<AccessorEntity> getAccessorEntity(@Body AuthBody authBody);
+
+
+	@POST("authorizations")
+	Observable<AccessorEntity> getAccessorEntity(@QueryMap Map<String, String> options, @Body AuthBody authBody);
 
 
 }

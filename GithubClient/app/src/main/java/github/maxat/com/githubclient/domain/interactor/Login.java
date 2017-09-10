@@ -31,11 +31,18 @@ public class Login extends UseCase<Boolean, Login.Params> {
 	@Override
 	Observable<Boolean> buildUseCaseObservable(Params params) {
 
-		Cache<AbsEntity> cache = new CacheImpl(AccessorEntity.class);
+		Cache<AbsEntity> cache = new CacheImpl(AbsEntity.class);
 
 		AccessorDataStoreFactory factory = new AccessorDataStoreFactory(cache);
 
-		return factory.create(AppNumeric.UNKNOWN).accessorEntity().map(entity -> entity!=null);
+		AccessorDataStore dataStore;
+
+		if (params!=null)
+			dataStore = factory.createCloudDataStore(params.login, params.password);
+		else
+			dataStore = factory.create(AppNumeric.UNKNOWN);
+
+		return dataStore.accessorEntity().map(entity -> entity!=null);
 
 	}
 

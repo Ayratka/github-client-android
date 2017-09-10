@@ -3,5 +3,6 @@
     <string name="edit_hint_login">Login</string>
     <string name="edit_hint_pass">Password</string>
     <string name="btn_text_ok">LOGIN</string>
-    <string name="error_login_or_pass">Incorrect login or password</string>
+    <string name="error_login_or_pass_incorrect">Incorrect login or password</string>
+    <string name="error_login_or_pass_empty">Login or password is empty</string>
 </resources>

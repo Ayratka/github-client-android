@@ -2,8 +2,12 @@ package github.maxat.com.githubclient.data.repository.datastore;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import github.maxat.com.githubclient.data.cache.Cache;
+import github.maxat.com.githubclient.data.cache.Specification;
 import github.maxat.com.githubclient.data.entity.AbsEntity;
+import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import github.maxat.com.githubclient.data.net.ApiService;
 import github.maxat.com.githubclient.data.net.RestApi;
 import github.maxat.com.githubclient.data.utils.AppNumeric;
@@ -15,11 +19,12 @@ import github.maxat.com.githubclient.data.utils.AppNumeric;
 public class AccessorDataStoreFactory {
 
 
-    private final Cache accessorCache;
+    private final Cache<AbsEntity> accessorCache;
 
 
-    public AccessorDataStoreFactory(@NonNull Cache<? extends AbsEntity> accessorCache) {
+    public AccessorDataStoreFactory(@NonNull Cache<AbsEntity> accessorCache) {
         this.accessorCache = accessorCache;
+
     }
 
 
@@ -32,13 +37,16 @@ public class AccessorDataStoreFactory {
         } else {
             accessorDataStore = createCloudDataStore();
         }
-
         return accessorDataStore;
     }
 
+    private AccessorDataStore createCloudDataStore() {
+        RestApi restApi = ApiService.create();
+        return new CloudAccessorDataStore(restApi, accessorCache);
+    }
 
-    public AccessorDataStore createCloudDataStore() {
-        final RestApi restApi = ApiService.create();
-        return new CloudAccessorDataStore(restApi, this.accessorCache);
+    public AccessorDataStore createCloudDataStore(String user, String password) {
+        RestApi restApi = ApiService.create(user, password);
+        return new CloudAccessorDataStore(restApi, accessorCache);
     }
 }

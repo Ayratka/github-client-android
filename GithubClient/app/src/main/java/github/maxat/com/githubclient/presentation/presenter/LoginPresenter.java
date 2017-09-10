@@ -2,6 +2,7 @@ package github.maxat.com.githubclient.presentation.presenter;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import github.maxat.com.githubclient.R;
@@ -23,8 +24,9 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 	LoginDataView loginDataView;
 
 
-	public LoginPresenter(Context context){
+	public LoginPresenter(Context context, @NonNull LoginDataView loginDataView){
 		this.context = context;
+		this.loginDataView = loginDataView;
 	}
 
 
@@ -54,13 +56,14 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 
 	public void actionLogin(String strLogin, String strPass) {
 
+		if (strLogin.isEmpty() || strPass.isEmpty())
+			loginDataView.showMessage(R.string.error_login_or_pass_empty);
+
 		Login login  = new Login (AndroidSchedulers.mainThread (), Schedulers.io ());
-		login.execute (
-				isSuccess -> {
-					Navigator.toMainPage(context);
-				},
-				isBad -> { loginDataView.showMessage(R.string.error_login_or_pass); },
-				Login.buildParams(strLogin, strPass));
+
+		login.execute (	 isSuccess -> {	Navigator.toMainPage(context);	},
+				    	 isBad -> { loginDataView.showMessage(R.string.error_login_or_pass_incorrect); },
+						 Login.buildParams(strLogin, strPass));
 	}
 
 

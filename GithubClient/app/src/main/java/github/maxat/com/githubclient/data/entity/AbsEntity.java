@@ -1,16 +1,17 @@
 package github.maxat.com.githubclient.data.entity;
 
+import io.realm.RealmModel;
 import io.realm.RealmObject;
 
 /**
  * Created by ajrat on 10.09.17.
  */
 
-public abstract class AbsEntity extends RealmObject{
+public  class AbsEntity implements RealmModel{
 
 
 
-    protected long last_cache_update_time;
+     long last_cache_update_time;
 
 
     public long getLast_cache_update_time() {

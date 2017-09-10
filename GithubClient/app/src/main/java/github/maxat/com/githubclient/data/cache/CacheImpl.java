@@ -11,6 +11,7 @@ import java.util.List;
 import github.maxat.com.githubclient.data.entity.AbsEntity;
 import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import io.realm.Realm;
+import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -24,12 +25,12 @@ public class CacheImpl implements Cache<AbsEntity>{
 
     private final static String ID  =   "id";
 
-    Class<? extends RealmObject> clazz;
+    Class<? extends RealmModel> clazz;
 
     private static final long EXPIRATION_TIME = 60 * 10 * 1000;
 
 
-    public CacheImpl(Class<? extends RealmObject> clazz){
+    public CacheImpl(Class<? extends RealmModel> clazz){
         this.clazz = clazz;
     }
 
