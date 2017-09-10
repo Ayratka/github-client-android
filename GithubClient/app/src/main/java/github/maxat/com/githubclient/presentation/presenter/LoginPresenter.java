@@ -1,10 +1,12 @@
 package github.maxat.com.githubclient.presentation.presenter;
 
+import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
 import github.maxat.com.githubclient.R;
 import github.maxat.com.githubclient.domain.interactor.Login;
+import github.maxat.com.githubclient.presentation.Navigator;
 import github.maxat.com.githubclient.presentation.view.kinds.BaseDataView;
 import github.maxat.com.githubclient.presentation.view.kinds.LoginDataView;
 import rx.android.schedulers.AndroidSchedulers;
@@ -16,8 +18,16 @@ import rx.schedulers.Schedulers;
  */
 public class LoginPresenter implements Presenter<LoginDataView> {
 
+	Context context;
 
 	LoginDataView loginDataView;
+
+
+	public LoginPresenter(Context context){
+		this.context = context;
+	}
+
+
 
 
 	@Override
@@ -46,9 +56,11 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 
 		Login login  = new Login (AndroidSchedulers.mainThread (), Schedulers.io ());
 		login.execute (
-				isSuccess -> {  },
-				isBad -> {	loginDataView.showMessage(R.string.error_login_or_pass); },
-				null);
+				isSuccess -> {
+					Navigator.toMainPage(context);
+				},
+				isBad -> { loginDataView.showMessage(R.string.error_login_or_pass); },
+				Login.buildParams(strLogin, strPass));
 	}
 
 

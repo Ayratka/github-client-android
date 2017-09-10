@@ -11,11 +11,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import github.maxat.com.githubclient.R;
 import github.maxat.com.githubclient.presentation.presenter.LoginPresenter;
+import github.maxat.com.githubclient.presentation.view.kinds.LoginDataView;
 
 /**
  * Created by ayrat on 07.09.17.
  */
-public class LoginActivity extends AbsActivity {
+public class LoginActivity extends AbsActivity implements LoginDataView {
 
 
 
@@ -37,7 +38,7 @@ public class LoginActivity extends AbsActivity {
 		super.onCreate (savedInstanceState);
 		setContentView (R.layout.activity_login);
 		ButterKnife.bind (this);
-		loginPresenter = new LoginPresenter ();
+		loginPresenter = new LoginPresenter (this);
 	}
 
 
@@ -46,7 +47,7 @@ public class LoginActivity extends AbsActivity {
 	protected void onClickLogin(){
 		final String login = editLogin.getText ().toString ();
 		final String pass = editPass.getText ().toString ();
-		loginPresenter.login(login, pass);
+		loginPresenter.actionLogin(login, pass);
 	}
 
 	@Override

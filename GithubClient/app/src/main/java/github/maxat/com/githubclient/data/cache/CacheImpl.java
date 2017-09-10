@@ -24,12 +24,12 @@ public class CacheImpl implements Cache<AbsEntity>{
 
     private final static String ID  =   "id";
 
-    Class<RealmObject> clazz;
+    Class<? extends RealmObject> clazz;
 
     private static final long EXPIRATION_TIME = 60 * 10 * 1000;
 
 
-    public CacheImpl(Class<RealmObject> clazz){
+    public CacheImpl(Class<? extends RealmObject> clazz){
         this.clazz = clazz;
     }
 

@@ -17,6 +17,8 @@ import rx.Observable;
 public interface RestApi {
 
 
-	@GET("mobile/get_user_details.json")
+	@GET("authorizations")
 	Observable<AccessorEntity> getAccessorEntity(@QueryMap Map<String, String> options);
+
+
 }
