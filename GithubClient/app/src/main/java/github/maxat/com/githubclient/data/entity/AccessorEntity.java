@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by ayrat on 08.09.17.
  */
-public class AccessorEntity extends RealmObject {
+public class AccessorEntity extends AbsEntity {
 
 
 	@PrimaryKey

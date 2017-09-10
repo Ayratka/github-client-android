@@ -24,9 +24,9 @@ public interface Cache<T>{
 
     void put(T object);
 
-    boolean isCached(final int id);
+    boolean isCached(final long id);
 
-    boolean isExpired();
+    boolean isExpired(final long id);
 
     void evictAll();
 
