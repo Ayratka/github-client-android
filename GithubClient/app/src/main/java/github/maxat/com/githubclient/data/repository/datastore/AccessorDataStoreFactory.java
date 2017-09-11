@@ -19,10 +19,10 @@ import github.maxat.com.githubclient.data.utils.AppNumeric;
 public class AccessorDataStoreFactory {
 
 
-    private final Cache<AbsEntity> accessorCache;
+    private final Cache<AccessorEntity> accessorCache;
 
 
-    public AccessorDataStoreFactory(@NonNull Cache<AbsEntity> accessorCache) {
+    public AccessorDataStoreFactory(@NonNull Cache<AccessorEntity> accessorCache) {
         this.accessorCache = accessorCache;
 
     }

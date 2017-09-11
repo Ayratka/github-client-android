@@ -3,7 +3,7 @@ package github.maxat.com.githubclient.presentation;
 import android.content.Context;
 import android.content.Intent;
 
-import github.maxat.com.githubclient.presentation.view.MainActivity;
+import github.maxat.com.githubclient.presentation.view.activity.MainActivity;
 
 /**
  * Created by ajrat on 10.09.17.

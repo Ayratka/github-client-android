@@ -19,7 +19,7 @@ import rx.functions.Func1;
 /**
  * Created by ayrat on 08.09.17.
  */
-public class Login extends UseCase<Boolean, Login.Params> {
+public class Login extends UseCase<AccessorEntity, Login.Params> {
 
 
 
@@ -29,7 +29,7 @@ public class Login extends UseCase<Boolean, Login.Params> {
 
 
 	@Override
-	Observable<Boolean> buildUseCaseObservable(Params params) {
+	Observable<AccessorEntity> buildUseCaseObservable(Params params) {
 
 		Cache<AbsEntity> cache = new CacheImpl(AbsEntity.class);
 
@@ -42,7 +42,7 @@ public class Login extends UseCase<Boolean, Login.Params> {
 		else
 			dataStore = factory.create(AppNumeric.UNKNOWN);
 
-		return dataStore.accessorEntity().map(entity -> entity!=null);
+		return dataStore.accessorEntity();
 
 	}
 

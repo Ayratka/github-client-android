@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:name=".presentation.AndroidApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.view.LoginActivity">
+        <activity android:name=".presentation.view.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

@@ -1,4 +1,4 @@
-package github.maxat.com.githubclient.presentation.view;
+package github.maxat.com.githubclient.presentation.view.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;

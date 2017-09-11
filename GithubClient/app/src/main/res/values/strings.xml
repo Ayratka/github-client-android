@@ -5,4 +5,6 @@
     <string name="btn_text_ok">LOGIN</string>
     <string name="error_login_or_pass_incorrect">Incorrect login or password</string>
     <string name="error_login_or_pass_empty">Login or password is empty</string>
+    <string name="error_extract_accessor">Не удалось найти данные пользователя</string>
+    <string name="buttion_text_log_out">Выйти</string>
 </resources>

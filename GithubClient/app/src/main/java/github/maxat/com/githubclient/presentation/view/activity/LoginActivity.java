@@ -1,9 +1,7 @@
-package github.maxat.com.githubclient.presentation.view;
+package github.maxat.com.githubclient.presentation.view.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 

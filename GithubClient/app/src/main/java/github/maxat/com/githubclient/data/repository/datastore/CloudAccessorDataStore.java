@@ -24,10 +24,10 @@ public class CloudAccessorDataStore  implements AccessorDataStore {
 
     final RestApi restApi;
 
-    Cache<AbsEntity> accessorCache;
+    Cache<AccessorEntity> accessorCache;
 
 
-    public CloudAccessorDataStore(@NonNull RestApi restApi, @NonNull Cache<AbsEntity> accessorCache){
+    public CloudAccessorDataStore(@NonNull RestApi restApi, @NonNull Cache<AccessorEntity> accessorCache){
         this.restApi  = restApi;
         this.accessorCache = accessorCache;
     }

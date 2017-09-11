@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import github.maxat.com.githubclient.R;
+import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import github.maxat.com.githubclient.domain.interactor.Login;
 import github.maxat.com.githubclient.presentation.Navigator;
 import github.maxat.com.githubclient.presentation.view.kinds.BaseDataView;
@@ -61,9 +62,19 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 
 		Login login  = new Login (AndroidSchedulers.mainThread (), Schedulers.io ());
 
-		login.execute (	 isSuccess -> {	Navigator.toMainPage(context);	},
-				    	 isBad -> { loginDataView.showMessage(R.string.error_login_or_pass_incorrect); },
-						 Login.buildParams(strLogin, strPass));
+		login.execute ( this::isSuccess,
+					    isBad -> { loginDataView.showMessage (R.string.error_login_or_pass_incorrect); },
+						Login.buildParams (strLogin, strPass));
+	}
+
+
+
+
+	private void isSuccess(AccessorEntity entity) {
+		if (entity!=null)
+			Navigator.toMainPage (context);
+		else
+			loginDataView.showMessage (R.string.error_extract_accessor);
 	}
 
 
