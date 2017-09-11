@@ -1,18 +1,23 @@
 package github.maxat.com.githubclient.presentation.presenter;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import github.maxat.com.githubclient.R;
+import github.maxat.com.githubclient.data.cache.Cache;
+import github.maxat.com.githubclient.data.cache.CacheImpl;
 import github.maxat.com.githubclient.data.entity.AccessorEntity;
+import github.maxat.com.githubclient.data.entity.mapper.AccessorDataMapper;
+import github.maxat.com.githubclient.data.repository.AccessorDataRepository;
+import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStore;
+import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStoreFactory;
 import github.maxat.com.githubclient.domain.interactor.Login;
+import github.maxat.com.githubclient.domain.model.Accessor;
+import github.maxat.com.githubclient.domain.repository.AccessorRepository;
 import github.maxat.com.githubclient.presentation.Navigator;
-import github.maxat.com.githubclient.presentation.view.kinds.BaseDataView;
 import github.maxat.com.githubclient.presentation.view.kinds.LoginDataView;
+import io.realm.RealmModel;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -29,8 +34,6 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 		this.context = context;
 		this.loginDataView = loginDataView;
 	}
-
-
 
 
 	@Override
@@ -60,19 +63,26 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 		if (strLogin.isEmpty() || strPass.isEmpty())
 			loginDataView.showMessage(R.string.error_login_or_pass_empty);
 
-		Login login  = new Login (AndroidSchedulers.mainThread (), Schedulers.io ());
+		Cache cache  = new CacheImpl(AccessorEntity.class);
 
-		login.execute ( this::isSuccess,
-					    isBad -> { loginDataView.showMessage (R.string.error_login_or_pass_incorrect); },
-						Login.buildParams (strLogin, strPass));
+		AccessorDataStoreFactory factory = new AccessorDataStoreFactory(cache);
+
+		AccessorDataStore dataStore = factory.createCloudDataStore(strLogin, strPass);
+
+		AccessorRepository repository = new AccessorDataRepository(dataStore, AccessorDataMapper.newInstance());
+
+		Login login  = new Login (repository, AndroidSchedulers.mainThread (), Schedulers.io ());
+
+		login.execute ( this::isSuccess, isBad -> { loginDataView.showMessage (R.string.error_login_or_pass_incorrect); }, null);
 	}
 
 
 
 
-	private void isSuccess(AccessorEntity entity) {
-		if (entity!=null)
-			Navigator.toMainPage (context);
+	private void isSuccess(Accessor entity) {
+		if (entity!=null) {
+			Navigator.toMainPage(context);
+		}
 		else
 			loginDataView.showMessage (R.string.error_extract_accessor);
 	}

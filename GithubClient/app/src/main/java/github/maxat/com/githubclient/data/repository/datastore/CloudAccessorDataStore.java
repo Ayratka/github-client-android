@@ -2,15 +2,8 @@ package github.maxat.com.githubclient.data.repository.datastore;
 
 import android.support.annotation.NonNull;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import github.maxat.com.githubclient.data.cache.Cache;
-import github.maxat.com.githubclient.data.cache.Specification;
-import github.maxat.com.githubclient.data.entity.AbsEntity;
 import github.maxat.com.githubclient.data.entity.AccessorEntity;
-import github.maxat.com.githubclient.data.net.ApiService;
 import github.maxat.com.githubclient.data.net.AuthBody;
 import github.maxat.com.githubclient.data.net.RestApi;
 import rx.Observable;
@@ -29,7 +22,7 @@ public class CloudAccessorDataStore  implements AccessorDataStore {
 
     public CloudAccessorDataStore(@NonNull RestApi restApi, @NonNull Cache<AccessorEntity> accessorCache){
         this.restApi  = restApi;
-        this.accessorCache = accessorCache;
+        this.accessorCache = (Cache<AccessorEntity>) accessorCache;
     }
     @Override
     public Observable<AccessorEntity> accessorEntity() {
@@ -37,9 +30,18 @@ public class CloudAccessorDataStore  implements AccessorDataStore {
         AuthBody authBody = new AuthBody();
         authBody.setScopes("gist", "read:user", "repo");
         authBody.setNote("Android Client");
-        return restApi.getAccessorEntity(authBody).doOnNext(
-                entity -> accessorCache.put(entity)
-        );
+        return restApi.getAccessorEntity(authBody).doOnNext(new Action1<AccessorEntity>() {
+            @Override
+            public void call(AccessorEntity entity) {
+
+                try {
+                    accessorCache.put(entity);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 

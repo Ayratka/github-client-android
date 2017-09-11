@@ -18,9 +18,15 @@ public class AndroidApplication extends MultiDexApplication {
 	public void onCreate() {
 		super.onCreate ();
 
-		Realm.init(this);
-		RealmConfiguration config = new RealmConfiguration.Builder().name(STORAGE_NAME).build();
-		Realm.setDefaultConfiguration(config);
+		Realm.init(getApplicationContext());
+
+		RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+				.name(STORAGE_NAME)
+				.schemaVersion(0)
+				.deleteRealmIfMigrationNeeded()
+				.build();
+		Realm.setDefaultConfiguration(realmConfiguration);
+
 
 	}
 

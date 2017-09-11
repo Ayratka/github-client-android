@@ -2,11 +2,7 @@ package github.maxat.com.githubclient.data.repository.datastore;
 
 import android.support.annotation.NonNull;
 
-import java.util.List;
-
 import github.maxat.com.githubclient.data.cache.Cache;
-import github.maxat.com.githubclient.data.cache.Specification;
-import github.maxat.com.githubclient.data.entity.AbsEntity;
 import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import github.maxat.com.githubclient.data.net.ApiService;
 import github.maxat.com.githubclient.data.net.RestApi;
@@ -22,7 +18,7 @@ public class AccessorDataStoreFactory {
     private final Cache<AccessorEntity> accessorCache;
 
 
-    public AccessorDataStoreFactory(@NonNull Cache<AccessorEntity> accessorCache) {
+    public AccessorDataStoreFactory(@NonNull Cache<AccessorEntity > accessorCache) {
         this.accessorCache = accessorCache;
 
     }

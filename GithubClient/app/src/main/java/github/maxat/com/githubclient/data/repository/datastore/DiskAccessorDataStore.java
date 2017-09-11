@@ -19,7 +19,7 @@ public class DiskAccessorDataStore  implements AccessorDataStore {
 
 
     public DiskAccessorDataStore(@NonNull Cache<AccessorEntity> accessorCache){
-        this.accessorCache = accessorCache;
+        this.accessorCache = (Cache<AccessorEntity>) accessorCache;
     }
 
     @Override

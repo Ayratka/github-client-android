@@ -16,13 +16,6 @@ public class Accessor {
 
 	String token;
 
-	String hashed_token;
-
-	String note;
-
-	String note_url;
-
-
 
 	public void setToken(String token) {
 		this.token = token;
@@ -32,16 +25,6 @@ public class Accessor {
 		this.id = id;
 	}
 
-	public void setHashed_token(String hashed_token) {
-		this.hashed_token = hashed_token;
-	}
 
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public void setNote_url(String note_url) {
-		this.note_url = note_url;
-	}
 
 }

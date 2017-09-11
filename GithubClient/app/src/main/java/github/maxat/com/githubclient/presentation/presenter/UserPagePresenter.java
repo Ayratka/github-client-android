@@ -1,6 +1,19 @@
 package github.maxat.com.githubclient.presentation.presenter;
 
+import github.maxat.com.githubclient.data.cache.Cache;
+import github.maxat.com.githubclient.data.cache.CacheImpl;
+import github.maxat.com.githubclient.data.entity.AccessorEntity;
+import github.maxat.com.githubclient.data.entity.mapper.AccessorDataMapper;
+import github.maxat.com.githubclient.data.repository.AccessorDataRepository;
+import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStore;
+import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStoreFactory;
+import github.maxat.com.githubclient.data.utils.AppNumeric;
+import github.maxat.com.githubclient.domain.interactor.Login;
+import github.maxat.com.githubclient.domain.model.Accessor;
+import github.maxat.com.githubclient.domain.repository.AccessorRepository;
 import github.maxat.com.githubclient.presentation.view.kinds.UserPageDataView;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ayrat on 11.09.17.
@@ -31,6 +44,26 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 	}
 
 	public void getUser() {
+
+		Cache cache = new CacheImpl(AccessorEntity.class);
+
+		AccessorDataStoreFactory factory = new AccessorDataStoreFactory(cache);
+
+		AccessorDataStore accessorDataStore = factory.create(AppNumeric.UNKNOWN);
+
+		AccessorRepository repository = new AccessorDataRepository(accessorDataStore, AccessorDataMapper.newInstance());
+
+		Login login = new Login(repository, AndroidSchedulers.mainThread(), Schedulers.io());
+
+		login.execute(this::getUserInfo, Throwable::printStackTrace, null);
+
+	}
+
+	private void getUserInfo(Accessor entity) {
+
+
+
+
 
 	}
 

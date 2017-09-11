@@ -1,15 +1,10 @@
 package github.maxat.com.githubclient.data.cache;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import github.maxat.com.githubclient.data.entity.AbsEntity;
-import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import io.realm.Realm;
 import io.realm.RealmModel;
 import io.realm.RealmObject;
@@ -21,32 +16,32 @@ import rx.Observable;
  * Created by ajrat on 09.09.17.
  */
 
-public class CacheImpl implements Cache<AbsEntity>{
+public class CacheImpl implements Cache<RealmObject >{
 
     private final static String ID  =   "id";
 
-    Class<? extends RealmModel> clazz;
+    Class<? extends RealmObject> clazz;
 
     private static final long EXPIRATION_TIME = 60 * 10 * 1000;
 
 
-    public CacheImpl(Class<? extends RealmModel> clazz){
+    public  CacheImpl(Class<? extends RealmObject> clazz){
         this.clazz = clazz;
     }
 
 
     @Override
-    public Observable<AbsEntity> get(Specification specification) {
+    public Observable<RealmObject> get(Specification specification) {
 
         RealmQuery realmQuery =  getQuery(specification);
 
-        return Observable.just((AbsEntity) realmQuery.findFirst());
+        return Observable.just((RealmObject) realmQuery.findFirst());
 
     }
 
 
     @Override
-    public Observable<AbsEntity> get(List<Specification> specifications) {
+    public Observable<RealmObject> get(List<Specification> specifications) {
 
         if (specifications  ==  null)
 
@@ -54,12 +49,12 @@ public class CacheImpl implements Cache<AbsEntity>{
 
         RealmQuery realmQuery = getQuery(specifications);
 
-        return Observable.just((AbsEntity) realmQuery.findFirst());
+        return Observable.just((RealmObject)realmQuery.findFirst());
 
     }
 
     @Override
-    public Observable<List<AbsEntity>> getList(List<Specification> specifications) {
+    public Observable<List<RealmObject>> getList(List<Specification> specifications) {
 
 
         RealmQuery realmQuery = getQuery(specifications);
@@ -68,11 +63,11 @@ public class CacheImpl implements Cache<AbsEntity>{
 
         Iterator iterator = realmObjects.iterator();
 
-        List<AbsEntity> objects = new ArrayList<>();
+        List<RealmObject> objects = new ArrayList<>();
 
         while (iterator.hasNext()){
 
-            AbsEntity realmObject = (AbsEntity) iterator.next();
+            RealmObject realmObject = (RealmObject) iterator.next();
 
             objects.add(realmObject);
         }
@@ -80,7 +75,7 @@ public class CacheImpl implements Cache<AbsEntity>{
     }
 
     @Override
-    public Observable<List<AbsEntity>> getList(Specification specification) {
+    public Observable<List<RealmObject>> getList(Specification specification) {
 
 
         RealmQuery realmQuery = getQuery(specification);
@@ -89,11 +84,11 @@ public class CacheImpl implements Cache<AbsEntity>{
 
         Iterator iterator = realmObjects.iterator();
 
-        List<AbsEntity> objects = new ArrayList<>();
+        List<RealmObject> objects = new ArrayList<>();
 
         while (iterator.hasNext()){
 
-            AbsEntity realmObject = (AbsEntity) iterator.next();
+            RealmObject realmObject = (RealmObject) iterator.next();
 
             objects.add(realmObject);
         }
@@ -101,13 +96,13 @@ public class CacheImpl implements Cache<AbsEntity>{
     }
 
     @Override
-    public void put(AbsEntity object) {
+    public void put(RealmObject object) {
 
         Realm realm = Realm.getDefaultInstance();
 
         realm.beginTransaction();
 
-        object.setLast_cache_update_time(System.currentTimeMillis());
+//        object.setLast_cache_update_time(System.currentTimeMillis());
 
         realm.copyToRealmOrUpdate(object);
 
@@ -132,17 +127,18 @@ public class CacheImpl implements Cache<AbsEntity>{
 
         RealmQuery realmQuery = getQuery(new BaseSpecification(ID, id));
 
-        AbsEntity entity = (AbsEntity) realmQuery.findFirst();
+        RealmModel entity = (RealmModel) realmQuery.findFirst();
 
-        long lastUpdateTime = entity.getLast_cache_update_time();
+//        long lastUpdateTime = entity.getLast_cache_update_time();
 
-        boolean expired = ((currentTime - lastUpdateTime) > EXPIRATION_TIME);
-
-        if (expired) {
-            this.evictAll();
-        }
-
-        return expired;
+//        boolean expired = ((currentTime - lastUpdateTime) > EXPIRATION_TIME);
+//
+//        if (expired) {
+//            this.evictAll();
+//        }
+//
+//        return expired;
+        return false;
     }
 
     @Override
