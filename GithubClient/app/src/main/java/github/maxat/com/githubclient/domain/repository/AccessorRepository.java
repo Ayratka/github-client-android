@@ -10,5 +10,7 @@ import rx.Observable;
 
 public interface AccessorRepository {
 
-    public Observable<Accessor> getAccessor();
+    public Observable<Accessor> readAccessor();
+
+	public Observable<Boolean>  deleteAccessor();
 }

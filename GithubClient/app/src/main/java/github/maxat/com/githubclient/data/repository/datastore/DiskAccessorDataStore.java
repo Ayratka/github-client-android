@@ -23,7 +23,12 @@ public class DiskAccessorDataStore  implements AccessorDataStore {
     }
 
     @Override
-    public Observable<AccessorEntity> accessorEntity() {
+    public Observable<AccessorEntity> readAccessorEntity() {
         return accessorCache.get(Collections.emptyList());
     }
+
+	@Override
+	public Observable<Boolean> deleteAccessorEntity() {
+		return Observable.just (accessorCache.evict ());
+	}
 }

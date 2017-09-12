@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import github.maxat.com.githubclient.data.repository.BaseSpecification;
+import github.maxat.com.githubclient.data.repository.Specification;
 import io.realm.Realm;
 import io.realm.RealmModel;
 import io.realm.RealmObject;
@@ -113,7 +115,7 @@ public class CacheImpl implements Cache<RealmObject >{
     @Override
     public boolean isCached(final long id) {
 
-        RealmQuery realmQuery = getQuery(new BaseSpecification(ID, id));
+        RealmQuery realmQuery = getQuery(new BaseSpecification (ID, id));
 
         return realmQuery.findFirst()!=null;
 
@@ -152,8 +154,13 @@ public class CacheImpl implements Cache<RealmObject >{
 
     }
 
+	@Override
+	public boolean evict() {
+		return false;
+	}
 
-    private RealmQuery getQuery(Specification specification){
+
+	private RealmQuery getQuery(Specification specification){
 
         Realm realm = Realm.getDefaultInstance();
 
@@ -215,26 +222,4 @@ public class CacheImpl implements Cache<RealmObject >{
     }
 
 
-    public class BaseSpecification implements Specification{
-
-        String field;
-
-        Object value;
-
-        public BaseSpecification(final String field, Object value){
-            this.field = field;
-            this.value = value;
-
-        }
-
-        @Override
-        public String getField() {
-            return field;
-        }
-
-        @Override
-        public Object getValue() {
-            return value;
-        }
-    }
 }

@@ -2,8 +2,7 @@ package github.maxat.com.githubclient.data.cache;
 
 import java.util.List;
 
-import github.maxat.com.githubclient.data.entity.AccessorEntity;
-import github.maxat.com.githubclient.domain.model.Accessor;
+import github.maxat.com.githubclient.data.repository.Specification;
 import rx.Observable;
 
 /**
@@ -29,6 +28,8 @@ public interface Cache<T>{
     boolean isExpired(final long id);
 
     void evictAll();
+
+	boolean evict();
 
 
 

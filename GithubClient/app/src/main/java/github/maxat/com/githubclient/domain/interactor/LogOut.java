@@ -6,23 +6,19 @@ import rx.Observable;
 import rx.Scheduler;
 
 /**
- * Created by ayrat on 08.09.17.
+ * Created by ayrat on 12.09.17.
  */
-public class LogIn extends UseCase<Accessor, Void> {
-
+public class LogOut  extends UseCase<Boolean, Void>  {
 
 	AccessorRepository accessorRepository;
 
-	public LogIn(AccessorRepository accessorRepository, Scheduler front, Scheduler back) {
+	public LogOut(AccessorRepository accessorRepository, Scheduler front, Scheduler back) {
 		super (front, back);
 		this.accessorRepository = accessorRepository;
 	}
 
-
 	@Override
-	Observable<Accessor> buildUseCaseObservable(Void unused) {
-		return accessorRepository.readAccessor ();
-
+	Observable<Boolean> buildUseCaseObservable(Void aVoid) {
+		return this.accessorRepository.deleteAccessor ();
 	}
-
 }

@@ -8,7 +8,7 @@ import github.maxat.com.githubclient.data.repository.AccessorDataRepository;
 import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStore;
 import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStoreFactory;
 import github.maxat.com.githubclient.data.utils.AppNumeric;
-import github.maxat.com.githubclient.domain.interactor.Login;
+import github.maxat.com.githubclient.domain.interactor.LogIn;
 import github.maxat.com.githubclient.domain.model.Accessor;
 import github.maxat.com.githubclient.domain.repository.AccessorRepository;
 import github.maxat.com.githubclient.presentation.view.kinds.UserPageDataView;
@@ -53,7 +53,7 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 
 		AccessorRepository repository = new AccessorDataRepository(accessorDataStore, AccessorDataMapper.newInstance());
 
-		Login login = new Login(repository, AndroidSchedulers.mainThread(), Schedulers.io());
+		LogIn login = new LogIn (repository, AndroidSchedulers.mainThread(), Schedulers.io());
 
 		login.execute(this::getUserInfo, Throwable::printStackTrace, null);
 
@@ -68,6 +68,8 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 	}
 
 	public void actionLogOut() {
+
+
 
 
 	}
