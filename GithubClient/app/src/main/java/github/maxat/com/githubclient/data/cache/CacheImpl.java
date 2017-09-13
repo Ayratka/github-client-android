@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import github.maxat.com.githubclient.data.entity.ICommonEntity;
 import github.maxat.com.githubclient.data.repository.BaseSpecification;
 import github.maxat.com.githubclient.data.repository.Specification;
 import io.realm.Realm;
@@ -104,7 +105,11 @@ public class CacheImpl implements Cache<RealmObject >{
 
         realm.beginTransaction();
 
-//        object.setLast_cache_update_time(System.currentTimeMillis());
+        if (object instanceof ICommonEntity){
+
+	        ((ICommonEntity) object).setLast_cache_update_time (System.currentTimeMillis());
+
+        }
 
         realm.copyToRealmOrUpdate(object);
 
@@ -131,16 +136,28 @@ public class CacheImpl implements Cache<RealmObject >{
 
         RealmModel entity = (RealmModel) realmQuery.findFirst();
 
-//        long lastUpdateTime = entity.getLast_cache_update_time();
+	    long lastUpdateTime;
 
-//        boolean expired = ((currentTime - lastUpdateTime) > EXPIRATION_TIME);
-//
-//        if (expired) {
-//            this.evictAll();
-//        }
-//
-//        return expired;
-        return false;
+	    if (entity instanceof ICommonEntity){
+
+		    lastUpdateTime  = ((ICommonEntity)entity).getLast_cache_update_time();
+
+		    boolean expired = ((currentTime - lastUpdateTime) > EXPIRATION_TIME);
+
+		    if (expired) {
+			    this.evictAll ();
+		    }
+
+		    return expired;
+
+	    }
+	    else
+	    {
+		    return false;
+	    }
+
+
+
     }
 
     @Override

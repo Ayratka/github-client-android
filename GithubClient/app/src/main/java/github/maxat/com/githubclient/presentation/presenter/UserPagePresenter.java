@@ -1,14 +1,12 @@
 package github.maxat.com.githubclient.presentation.presenter;
 
-import github.maxat.com.githubclient.R;
 import github.maxat.com.githubclient.data.cache.Cache;
 import github.maxat.com.githubclient.data.cache.CacheImpl;
 import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import github.maxat.com.githubclient.data.entity.mapper.AccessorDataMapper;
 import github.maxat.com.githubclient.data.repository.AccessorDataRepository;
 import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStore;
-import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStoreFactory;
-import github.maxat.com.githubclient.data.utils.AppNumeric;
+import github.maxat.com.githubclient.data.repository.datastore.accessor.AccessorDataStoreFactory;
 import github.maxat.com.githubclient.domain.interactor.LogIn;
 import github.maxat.com.githubclient.domain.interactor.LogOut;
 import github.maxat.com.githubclient.domain.model.Accessor;
@@ -62,6 +60,7 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 	}
 
 	private void getUserInfo(Accessor entity) {
+
 
 
 

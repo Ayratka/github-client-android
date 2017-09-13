@@ -47,28 +47,28 @@ public class ApiService {
 	}
 
 
-//	public static RestApi create( )
-//	{
-//
-//		OkHttpClient client = new OkHttpClient.Builder().build();
-//
-//
-//		if (BuildConfig.DEBUG) {
-//			HttpLoggingInterceptor logging = new HttpLoggingInterceptor ();
-//			logging.setLevel (HttpLoggingInterceptor.Level.HEADERS);
-//		}
-//
-//		Retrofit retrofit = new Retrofit.Builder()
-//				.baseUrl("https://api.github.com/")
-//				.addConverterFactory(GsonConverterFactory.create(new GsonBuilder ().serializeNulls().create()))
-//				.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//				.client(client)
-//				.build();
-//
-//
-//		return retrofit.create(RestApi.class);
-//
-//	}
+	public static RestApi create( )
+	{
+
+		OkHttpClient client = new OkHttpClient.Builder().build();
+
+
+		if (BuildConfig.DEBUG) {
+			HttpLoggingInterceptor logging = new HttpLoggingInterceptor ();
+			logging.setLevel (HttpLoggingInterceptor.Level.HEADERS);
+		}
+
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("https://api.github.com/")
+				.addConverterFactory(GsonConverterFactory.create(new GsonBuilder ().serializeNulls().create()))
+				.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+				.client(client)
+				.build();
+
+
+		return retrofit.create(RestApi.class);
+
+	}
 
 
 }

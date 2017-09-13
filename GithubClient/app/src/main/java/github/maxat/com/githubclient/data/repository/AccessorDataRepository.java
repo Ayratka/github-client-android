@@ -1,14 +1,10 @@
 package github.maxat.com.githubclient.data.repository;
 
-import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import github.maxat.com.githubclient.data.entity.mapper.AccessorDataMapper;
 import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStore;
-import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStoreFactory;
-import github.maxat.com.githubclient.data.utils.AppNumeric;
 import github.maxat.com.githubclient.domain.model.Accessor;
 import github.maxat.com.githubclient.domain.repository.AccessorRepository;
 import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * Created by ajrat on 11.09.17.

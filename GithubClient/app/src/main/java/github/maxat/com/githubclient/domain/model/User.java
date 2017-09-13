@@ -8,11 +8,29 @@ public class User {
 
 
 
-    String name;
+	long id;
 
-    public String getName() {
-        return name;
-    }
+	String login;
 
+	String avatar_url;
+
+	int public_repos;
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setAvatar_url(String avatar_url) {
+		this.avatar_url = avatar_url;
+	}
+
+	public void setPublic_repos(int public_repos) {
+		this.public_repos = public_repos;
+	}
 
 }

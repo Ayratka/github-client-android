@@ -6,9 +6,25 @@ package github.maxat.com.githubclient.presentation.model;
 
 public class UserModel {
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    String name;
+	String login;
+
+	String avatar_url;
+
+	int public_repos;
+
+
+	public void setPublic_repos(int public_repos) {
+		this.public_repos = public_repos;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setAvatar_url(String avatar_url) {
+		this.avatar_url = avatar_url;
+	}
+
+
 }

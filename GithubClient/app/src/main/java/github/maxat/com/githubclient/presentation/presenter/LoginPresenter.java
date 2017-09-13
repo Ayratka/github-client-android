@@ -10,7 +10,7 @@ import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import github.maxat.com.githubclient.data.entity.mapper.AccessorDataMapper;
 import github.maxat.com.githubclient.data.repository.AccessorDataRepository;
 import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStore;
-import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStoreFactory;
+import github.maxat.com.githubclient.data.repository.datastore.accessor.AccessorDataStoreFactory;
 import github.maxat.com.githubclient.domain.interactor.LogIn;
 import github.maxat.com.githubclient.domain.model.Accessor;
 import github.maxat.com.githubclient.domain.repository.AccessorRepository;

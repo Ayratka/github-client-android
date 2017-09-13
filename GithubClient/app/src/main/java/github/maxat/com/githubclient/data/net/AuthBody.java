@@ -15,21 +15,10 @@ public class AuthBody {
 
     String note;
 
+	final String client_id = "d91bbf0288ebe87426bb";
 
+	final String client_secret = "a2cc73d39039b1347d6a7c91003c7bcea27de1fd";
 
-	String note_url;
-
-	String client_id;
-
-	String client_secret;
-
-	public void setClient_id(String client_id) {
-		this.client_id = client_id;
-	}
-
-	public void setClient_secret(String client_secret) {
-		this.client_secret = client_secret;
-	}
 
     public void setScopes(String ... args) {
         if (args == null)
@@ -41,9 +30,6 @@ public class AuthBody {
         }
     }
 
-	public void setNote_url(String note_url) {
-		this.note_url = note_url;
-	}
 
     public void setNote(String note) {
         this.note = note;
