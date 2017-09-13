@@ -33,12 +33,8 @@ public class AccessorDataRepository implements AccessorRepository {
 	}
 
 	@Override
-	public Observable<Boolean> deleteAccessor() {
-		return dataStore.deleteAccessorEntity ().map (new Func1<Boolean, Boolean> () {
-			@Override
-			public Boolean call(Boolean aBoolean) {
-				return null;
-			}
-		});
+	public Observable<Void> deleteAccessor() {
+		return dataStore.deleteAccessorEntity ();
 	}
+
 }

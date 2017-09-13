@@ -11,6 +11,6 @@ public interface AccessorDataStore {
 
     Observable<AccessorEntity> readAccessorEntity();
 
-	Observable<Boolean>   deleteAccessorEntity();
+	Observable<Void>   deleteAccessorEntity();
 
 }

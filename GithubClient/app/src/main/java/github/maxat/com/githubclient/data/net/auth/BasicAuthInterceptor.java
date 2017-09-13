@@ -1,4 +1,4 @@
-package github.maxat.com.githubclient.data.net;
+package github.maxat.com.githubclient.data.net.auth;
 
 import java.io.IOException;
 
@@ -11,15 +11,12 @@ import okhttp3.Response;
  * Created by ajrat on 10.09.17.
  */
 
-public class BasicAuthInterceptor implements Interceptor {
-
-    private final String AUTHORIZATION	=	"Authorization";
+public class BasicAuthInterceptor extends AuthInterceptor {
 
 
-    private String credentials;
 
     public BasicAuthInterceptor(String user, String password) {
-        this.credentials = Credentials.basic(user, password);
+        credentials = Credentials.basic(user, password);
     }
 
     @Override

@@ -12,5 +12,5 @@ public interface AccessorRepository {
 
     public Observable<Accessor> readAccessor();
 
-	public Observable<Boolean>  deleteAccessor();
+	public Observable<Void>     deleteAccessor();
 }

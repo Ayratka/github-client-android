@@ -24,12 +24,14 @@ public interface RestApi {
 	Observable<AccessorEntity> getAccessorEntity(@Body AuthBody authBody);
 
 
+	@DELETE("authorizations/{id}")
+	Observable<Object> deleteAccessorEntity(@Path("id") long id);
+
+
+
+
 	@POST("authorizations")
 	Observable<AccessorEntity> getAccessorEntity(@QueryMap Map<String, String> options, @Body AuthBody authBody);
-
-
-	@DELETE("authorizations/{id}")
-	Observable<Object> deleteAccessorEntity(@Path("id") long id, @QueryMap Map<String, String> options);
 
 
 	@GET("user")

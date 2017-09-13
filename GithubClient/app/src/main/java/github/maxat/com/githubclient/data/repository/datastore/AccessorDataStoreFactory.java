@@ -2,11 +2,17 @@ package github.maxat.com.githubclient.data.repository.datastore;
 
 import android.support.annotation.NonNull;
 
+import java.util.Collections;
+
 import github.maxat.com.githubclient.data.cache.Cache;
 import github.maxat.com.githubclient.data.entity.AccessorEntity;
 import github.maxat.com.githubclient.data.net.ApiService;
 import github.maxat.com.githubclient.data.net.RestApi;
+import github.maxat.com.githubclient.data.net.auth.BasicAuthInterceptor;
+import github.maxat.com.githubclient.data.net.auth.TokenAuthInterceptor;
 import github.maxat.com.githubclient.data.utils.AppNumeric;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
  * Created by ajrat on 09.09.17.
@@ -24,25 +30,29 @@ public class AccessorDataStoreFactory {
     }
 
 
-    public AccessorDataStore create(int accessorId) {
+    public void createCloudDataStore(@NonNull CreatedStore createdStore) {
 
-        AccessorDataStore accessorDataStore;
+	     accessorCache.get (Collections.emptyList ())
+			    .doOnNext (entity -> {
 
-        if (accessorId!= AppNumeric.UNKNOWN && !this.accessorCache.isExpired(accessorId) && this.accessorCache.isCached(accessorId)) {
-            accessorDataStore = new DiskAccessorDataStore(this.accessorCache);
-        } else {
-            accessorDataStore = createCloudDataStore();
-        }
-        return accessorDataStore;
-    }
+				    RestApi restApi = ApiService.create(new TokenAuthInterceptor (entity.getToken ()));
+					createdStore.postAccessorDataStore (new CloudAccessorDataStore(restApi, accessorCache));
 
-    public AccessorDataStore createCloudDataStore() {
-        RestApi restApi = ApiService.create();
-        return new CloudAccessorDataStore(restApi, accessorCache);
+			    }).subscribe ();
+
     }
 
     public AccessorDataStore createCloudDataStore(String user, String password) {
-        RestApi restApi = ApiService.create(user, password);
+        RestApi restApi = ApiService.create(new BasicAuthInterceptor (user, password));
         return new CloudAccessorDataStore(restApi, accessorCache);
     }
+
+	public AccessorDataStore createDiskDataStore() {
+		return new DiskAccessorDataStore (accessorCache);
+	}
+
+
+	public interface CreatedStore{
+		public void postAccessorDataStore(AccessorDataStore accessorDataStore);
+	}
 }

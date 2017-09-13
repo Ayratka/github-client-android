@@ -51,7 +51,7 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 
 		AccessorDataStoreFactory factory = new AccessorDataStoreFactory(cache);
 
-		AccessorDataStore accessorDataStore = factory.create(AppNumeric.UNKNOWN);
+		AccessorDataStore accessorDataStore = factory.createDiskDataStore ();
 
 		AccessorRepository repository = new AccessorDataRepository(accessorDataStore, AccessorDataMapper.newInstance());
 
@@ -75,13 +75,20 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 
 		AccessorDataStoreFactory factory = new AccessorDataStoreFactory(cache);
 
-		AccessorDataStore dataStore = factory.createCloudDataStore();
 
-		AccessorRepository repository = new AccessorDataRepository(dataStore, AccessorDataMapper.newInstance());
+		factory.createCloudDataStore (dataStore -> {
 
-		LogOut logOut  = new LogOut (repository, AndroidSchedulers.mainThread (), Schedulers.io ());
 
-		logOut.execute( isSuccess -> {}, isBad -> {}, null);
+			AccessorRepository repository = new AccessorDataRepository(dataStore, AccessorDataMapper.newInstance());
+
+			LogOut logOut  = new LogOut (repository, AndroidSchedulers.mainThread (), Schedulers.io ());
+
+			logOut.execute( isSuccess -> {}, isBad -> {}, null);
+
+
+		});
+
+
 
 
 

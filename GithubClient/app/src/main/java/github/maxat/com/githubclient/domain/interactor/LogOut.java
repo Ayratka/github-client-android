@@ -8,7 +8,7 @@ import rx.Scheduler;
 /**
  * Created by ayrat on 12.09.17.
  */
-public class LogOut  extends UseCase<Boolean, Void>  {
+public class LogOut  extends UseCase<Void, Void>  {
 
 	AccessorRepository accessorRepository;
 
@@ -18,7 +18,8 @@ public class LogOut  extends UseCase<Boolean, Void>  {
 	}
 
 	@Override
-	Observable<Boolean> buildUseCaseObservable(Void aVoid) {
-		return this.accessorRepository.deleteAccessor ();
+	Observable<Void> buildUseCaseObservable(Void aVoid) {
+		this.accessorRepository.deleteAccessor ();
+		return Observable.empty ();
 	}
 }
