@@ -36,7 +36,7 @@ public class AccessorDataStoreFactory {
         return accessorDataStore;
     }
 
-    private AccessorDataStore createCloudDataStore() {
+    public AccessorDataStore createCloudDataStore() {
         RestApi restApi = ApiService.create();
         return new CloudAccessorDataStore(restApi, accessorCache);
     }

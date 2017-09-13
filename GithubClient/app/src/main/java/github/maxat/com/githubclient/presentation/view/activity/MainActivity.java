@@ -6,6 +6,7 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import github.maxat.com.githubclient.R;
 import github.maxat.com.githubclient.presentation.presenter.MainPresenter;
+import github.maxat.com.githubclient.presentation.view.fragment.UserPageFragment;
 
 public class MainActivity extends AbsActivity{
 
@@ -18,6 +19,7 @@ public class MainActivity extends AbsActivity{
 		setContentView (R.layout.activity_main);
 		ButterKnife.bind (this);
 		mainPresenter = new MainPresenter ();
+		switchFragment(UserPageFragment.newInstance(Bundle.EMPTY));
 	}
 
 
