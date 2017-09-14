@@ -41,26 +41,13 @@ public class CloudAccessorDataStore  implements AccessorDataStore {
     public Observable<AccessorEntity> readAccessorEntity() {
 
         AuthBody authBody = AuthBody.newInstance();
-        return restApi.getAccessorEntity(authBody).doOnNext(
-		        entity -> {accessorCache.put(entity);}
 
-        );
+        return restApi.getAccessorEntity(authBody).doOnNext( entity -> { accessorCache.put(entity); }  );
     }
 
 	@Override
 	public Observable<Void> deleteAccessorEntity() {
-
-//		accessorCache.get (Collections.emptyList ())
-//				.doOnNext (entity -> {
-//
-//				})
-//				.map (entity -> {
-//					return Observable.just (entity!=null);
-//				})
-//				.subscribe ();
-
-
-		return Observable.empty ();
+		throw  new ExceptionInInitializerError ("This method does not implement");
 	}
 
 

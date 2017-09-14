@@ -70,25 +70,7 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 
 	public void actionLogOut() {
 
-		Cache cache  = new CacheImpl(AccessorEntity.class);
-
-		AccessorDataStoreFactory factory = new AccessorDataStoreFactory(cache);
-
-
-		factory.createCloudDataStore (dataStore -> {
-
-
-			AccessorRepository repository = new AccessorDataRepository(dataStore, AccessorDataMapper.newInstance());
-
-			LogOut logOut  = new LogOut (repository, AndroidSchedulers.mainThread (), Schedulers.io ());
-
-			logOut.execute( isSuccess -> {}, isBad -> {}, null);
-
-
-		});
-
-
-
+		
 
 
 	}

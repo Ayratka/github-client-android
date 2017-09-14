@@ -1,6 +1,7 @@
 package github.maxat.com.githubclient.data.repository.datastore.user;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,6 +37,11 @@ public class UserCloudDataStore implements UserDataStore {
 			Map<String, String> options = new HashMap<String, String> ();
 			options.put ("access_token",  entity.getToken ());
 			return restApi.getUser (options);
+		}).map (userEntity -> {
+
+			Log.d ("zz", "zz");
+			return userEntity;
+
 		});
 
 	}
