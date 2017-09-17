@@ -72,15 +72,15 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 
 		LogIn login  = new LogIn (repository, AndroidSchedulers.mainThread (), Schedulers.io ());
 
-		login.execute ( this::isSuccess, isBad -> { loginDataView.showMessage (R.string.error_login_or_pass_incorrect); }, null);
+		login.execute ( this::action, isBad -> { loginDataView.showMessage (R.string.error_login_or_pass_incorrect); }, null);
 	}
 
 
 
 
-	private void isSuccess(Accessor entity) {
-		if (entity!=null) {
-			Navigator.toMainPage(context);
+	private void action(boolean isSuccess) {
+		if (isSuccess) {
+			Navigator.toMainPage(loginDataView.getAbsActivity());
 		}
 		else
 			loginDataView.showMessage (R.string.error_extract_accessor);

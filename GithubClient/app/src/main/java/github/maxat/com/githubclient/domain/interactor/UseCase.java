@@ -30,7 +30,7 @@ public abstract class UseCase <T, Params>{
 
 
 	public void execute(Action1<? super T> action, Action1<Throwable> throwable, Params params) {
-		subscription =this.buildUseCaseObservable(params)
+		subscription = this.buildUseCaseObservable(params)
 				.subscribeOn(back)
 				.unsubscribeOn (back)
 				.observeOn(front)

@@ -7,6 +7,10 @@ import github.maxat.com.githubclient.data.net.ApiService;
 import github.maxat.com.githubclient.data.net.RestApi;
 import github.maxat.com.githubclient.data.repository.datastore.UserDataStore;
 import github.maxat.com.githubclient.domain.model.Accessor;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by ayrat on 14.09.17.
@@ -26,17 +30,47 @@ public class UserDataStoreFactory {
 	}
 
 
-	public UserDataStore create(final long id){
+	public void create(CreatedUserDataStore createdUserDataStore, final long id){
 
-		UserDataStore userDataStore;
-		if (cache.isCached (id) && !cache.isExpired (id)){
-			userDataStore = new UserDiskDataStore (accessorCache, cache);
-		}
-		else
-		{
-			RestApi restApi = ApiService.create ();
-			userDataStore = new UserCloudDataStore (restApi, accessorCache);
-		}
-		return userDataStore;
+		Observable.zip(cache.isCached(id), cache.isExpired(id),
+
+				(isCached, isExpired) -> isCached && !isExpired).observeOn(AndroidSchedulers.mainThread())
+
+			.observeOn(AndroidSchedulers.mainThread())
+		    .subscribeOn(Schedulers.computation())
+				.unsubscribeOn(Schedulers.computation())
+				.subscribe( isOffline -> {
+
+					UserDataStore userDataStore;
+
+					if (isOffline)
+						userDataStore = new UserDiskDataStore (accessorCache, cache);
+					else {
+						RestApi restApi = ApiService.create ();
+						userDataStore = new UserCloudDataStore (restApi, accessorCache, cache);
+					}
+
+					createdUserDataStore.postUserDataStore(userDataStore);
+
+
+				}, throwable -> {
+
+					RestApi restApi = ApiService.create ();
+
+					UserDataStore userDataStore = new UserCloudDataStore (restApi, accessorCache, cache);
+
+					createdUserDataStore.postUserDataStore(userDataStore);
+
+
+				});
+
+
+
+	}
+
+
+	public interface CreatedUserDataStore{
+
+		public void postUserDataStore(UserDataStore userDataStore);
 	}
 }

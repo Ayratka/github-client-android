@@ -12,6 +12,7 @@ import io.realm.annotations.PrimaryKey;
 public class Accessor {
 
 
+
 	long id;
 
 	String token;
@@ -26,5 +27,12 @@ public class Accessor {
 	}
 
 
+	public long getId() {
+		return id;
+	}
+
+	public String getToken() {
+		return token;
+	}
 
 }

@@ -18,10 +18,11 @@ import github.maxat.com.githubclient.data.repository.datastore.AccessorDataStore
 public class AccessorDataStoreFactory {
 
 
-    private final Cache<AccessorEntity> accessorCache;
+    private  Cache accessorCache;
 
 
-    public AccessorDataStoreFactory(@NonNull Cache<AccessorEntity > accessorCache) {
+
+    public AccessorDataStoreFactory(@NonNull Cache accessorCache) {
         this.accessorCache = accessorCache;
 
     }

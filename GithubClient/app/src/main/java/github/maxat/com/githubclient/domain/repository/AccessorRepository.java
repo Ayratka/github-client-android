@@ -10,7 +10,6 @@ import rx.Observable;
 
 public interface AccessorRepository {
 
-    public Observable<Accessor> readAccessor();
+    public Observable<Accessor> read();
 
-	public Observable<Void>     deleteAccessor();
 }

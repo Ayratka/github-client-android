@@ -15,8 +15,12 @@ public class UserModelMapper implements ViewMapper<User, UserModel> {
 
     @Override
     public UserModel transform(User user) {
+
         UserModel userModel = new UserModel();
-        userModel.setName(user.getName());
+        userModel.setLogin(user.getLogin());
+        userModel.setAvatar_url(user.getAvatar_url());
+        userModel.setPublic_repos(user.getPublic_repos());
+
         return userModel;
     }
 

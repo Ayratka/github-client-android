@@ -13,6 +13,7 @@ import github.maxat.com.githubclient.data.entity.UserEntity;
 import github.maxat.com.githubclient.data.net.RestApi;
 import github.maxat.com.githubclient.data.repository.datastore.UserDataStore;
 import rx.Observable;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 /**
@@ -24,10 +25,13 @@ public class UserCloudDataStore implements UserDataStore {
 
 	Cache<AccessorEntity> accessorCache;
 
+	Cache<UserEntity> userEntityCache;
 
-	public UserCloudDataStore(@NonNull RestApi restApi,  Cache<AccessorEntity> accessorCache){
+
+	public UserCloudDataStore(@NonNull RestApi restApi,  Cache<AccessorEntity> accessorCache, Cache<UserEntity> userEntityCache){
 		this.restApi  = restApi;
 		this.accessorCache = accessorCache;
+		this.userEntityCache  = userEntityCache;
 	}
 
 	@Override
@@ -37,12 +41,7 @@ public class UserCloudDataStore implements UserDataStore {
 			Map<String, String> options = new HashMap<String, String> ();
 			options.put ("access_token",  entity.getToken ());
 			return restApi.getUser (options);
-		}).map (userEntity -> {
-
-			Log.d ("zz", "zz");
-			return userEntity;
-
-		});
+		}).doOnNext(userEntity -> userEntityCache.put(userEntity).subscribe());
 
 	}
 }

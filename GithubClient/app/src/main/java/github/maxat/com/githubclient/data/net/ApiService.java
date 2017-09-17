@@ -19,6 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiService {
 
 
+	private final static String BASE_URL = "https://api.github.com/";
+
+	public final static String  GITHUB_APP = "https://github.com/settings/applications";
+
 
 	public static RestApi create(@NonNull AuthInterceptor authInterceptor)
 	{
@@ -35,7 +39,7 @@ public class ApiService {
 		}
 
 		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl("https://api.github.com/")
+				.baseUrl(BASE_URL)
 				.addConverterFactory(GsonConverterFactory.create(new GsonBuilder ().serializeNulls().create()))
 				.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 				.client(client)

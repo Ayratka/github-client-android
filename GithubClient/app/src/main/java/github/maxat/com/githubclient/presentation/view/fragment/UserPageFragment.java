@@ -1,12 +1,16 @@
 package github.maxat.com.githubclient.presentation.view.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -14,6 +18,7 @@ import butterknife.OnClick;
 import github.maxat.com.githubclient.R;
 import github.maxat.com.githubclient.presentation.presenter.Presenter;
 import github.maxat.com.githubclient.presentation.presenter.UserPagePresenter;
+import github.maxat.com.githubclient.presentation.view.activity.AbsActivity;
 import github.maxat.com.githubclient.presentation.view.kinds.UserPageDataView;
 
 /**
@@ -22,14 +27,21 @@ import github.maxat.com.githubclient.presentation.view.kinds.UserPageDataView;
 public class UserPageFragment extends AbsFragment implements UserPageDataView{
 
 
+
+	AbsActivity absActivity;
+
 	UserPagePresenter userPagePresenter;
+
+	public void setAbsActivity(AbsActivity absActivity) {
+		this.absActivity = absActivity;
+	}
 
 
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
-		userPagePresenter = new UserPagePresenter ();
+		userPagePresenter = new UserPagePresenter (getContext());
 		userPagePresenter.attach (this);
 	}
 
@@ -46,6 +58,15 @@ public class UserPageFragment extends AbsFragment implements UserPageDataView{
 	@BindView (R.id.tvName)
 	TextView tvName;
 
+
+	@BindView(R.id.ivAvatar)
+	ImageView ivAvatar;
+
+	@BindView(R.id.tvPublicRepo)
+	TextView tvPublicRepo;
+
+
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,13 +79,13 @@ public class UserPageFragment extends AbsFragment implements UserPageDataView{
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated (view, savedInstanceState);
-		userPagePresenter.getUser();
+		userPagePresenter.selfUser();
 	}
 
 
 	@OnClick(R.id.btnLogOut)
 	public void onClickLogOut(){
-		userPagePresenter.actionLogOut();
+		userPagePresenter.actionLogOut( );
 	}
 
 
@@ -78,9 +99,27 @@ public class UserPageFragment extends AbsFragment implements UserPageDataView{
 		return content;
 	}
 
+
 	@Override
-	public void onAttachFragment(Fragment childFragment) {
-		super.onAttachFragment (childFragment);
-		userPagePresenter.attach (this);
+	public AbsActivity getAbsActivity() {
+		return absActivity.getAbsActivity();
+	}
+
+	@Override
+	public void showLogin(String login) {
+		tvName.setText(login);
+	}
+
+	@Override
+	public void showAvatar(String url) {
+		Picasso.with(getContext())
+				.load(url)
+				.error(android.R.drawable.stat_notify_error)
+				.into(ivAvatar);
+	}
+
+	@Override
+	public void showPublicRep(int repo) {
+		tvPublicRepo.setText(String.valueOf(repo));
 	}
 }

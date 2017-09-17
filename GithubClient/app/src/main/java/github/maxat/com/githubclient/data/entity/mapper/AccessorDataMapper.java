@@ -20,9 +20,16 @@ public class AccessorDataMapper implements Mapper<AccessorEntity, Accessor> {
 
     @Override
     public Accessor transform(AccessorEntity entity) {
+
         Accessor accessor = new Accessor();
+
+        if (entity == null)
+            return accessor;
+
         accessor.setToken(entity.getToken());
         accessor.setId(entity.getId());
+
+
         return accessor;
     }
 

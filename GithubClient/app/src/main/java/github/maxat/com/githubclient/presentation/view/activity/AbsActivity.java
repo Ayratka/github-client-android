@@ -32,5 +32,10 @@ public abstract class AbsActivity extends AppCompatActivity implements BaseDataV
 				.commitAllowingStateLoss ();
 	}
 
+	@Override
+	public AbsActivity getAbsActivity() {
+		return this;
+	}
+
 
 }

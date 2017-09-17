@@ -3,6 +3,7 @@ package github.maxat.com.githubclient.data.cache;
 import java.util.List;
 
 import github.maxat.com.githubclient.data.repository.Specification;
+import io.realm.RealmObject;
 import rx.Observable;
 
 /**
@@ -21,15 +22,14 @@ public interface Cache<T>{
     Observable<List<T>> getList(Specification specification);
 
 
-    void put(T object);
+    Observable<Void> put(T object);
 
-    boolean isCached(final long id);
+    Observable<Boolean> isCached(final long id);
 
-    boolean isExpired(final long id);
+    Observable<Boolean> isExpired(final long id);
 
-    void evictAll();
+    Observable<Void> evictAll();
 
-	boolean evict();
 
 
 

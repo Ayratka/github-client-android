@@ -7,19 +7,12 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by ayrat on 08.09.17.
  */
-public class AccessorEntity extends RealmObject {
+public class AccessorEntity extends RealmObject implements ICommonAction{
 
 
 	@PrimaryKey
 	long id;
 
-	public String getToken() {
-		return token;
-	}
-
-	public long getId() {
-		return id;
-	}
 
 	String token;
 
@@ -29,17 +22,24 @@ public class AccessorEntity extends RealmObject {
 
 	String note_url;
 
+	 long last_cache_update_time;
 
+	@Override
+	public void setLast_cache_update_time(long time) {
+		this.last_cache_update_time = time;
+	}
 
-	long last_cache_update_time;
-
-
+	@Override
 	public long getLast_cache_update_time() {
 		return last_cache_update_time;
 	}
 
-	public void setLast_cache_update_time(long last_cache_update_time) {
-		this.last_cache_update_time = last_cache_update_time;
+	public String getToken() {
+		return token;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 

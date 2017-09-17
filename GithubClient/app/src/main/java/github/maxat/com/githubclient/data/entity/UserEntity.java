@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by ayrat on 11.09.17.
  */
-public class UserEntity extends RealmObject implements ICommonEntity{
+public class UserEntity extends RealmObject implements ICommonAction{
 
 
 
@@ -33,7 +33,9 @@ public class UserEntity extends RealmObject implements ICommonEntity{
 
 	String updated_at;
 
-	long last_cache_update_time;
+
+	 long last_cache_update_time;
+
 
 
 	public long getId() {
