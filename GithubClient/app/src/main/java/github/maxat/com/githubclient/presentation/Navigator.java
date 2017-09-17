@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
+import github.maxat.com.githubclient.Constants;
 import github.maxat.com.githubclient.data.net.ApiService;
 import github.maxat.com.githubclient.presentation.view.activity.AbsActivity;
 import github.maxat.com.githubclient.presentation.view.activity.LoginActivity;
@@ -30,7 +31,7 @@ public class Navigator {
     public static void toWebPage(AbsActivity context){
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(ApiService.GITHUB_APP));
+        intent.setData(Uri.parse(Constants.GITHUB_APP));
         context.startActivity(intent);
     }
 

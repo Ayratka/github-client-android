@@ -34,6 +34,8 @@ public class MainPresenter implements Presenter<MainDataView> {
 
 	Context context;
 
+	LogIn login;
+
 	public MainPresenter(Context context){
 		this.context = context;
 	}
@@ -51,6 +53,10 @@ public class MainPresenter implements Presenter<MainDataView> {
 	@Override
 	public void destroy() {
 
+		if (login!=null)
+			login.dispose();
+
+		mainDataView = null;
 	}
 
 	@Override
@@ -62,7 +68,7 @@ public class MainPresenter implements Presenter<MainDataView> {
 
 
 
-		LogIn login = LogIn.newInstance();
+		login = LogIn.newInstance();
 
 		login.execute(this::action, throwable -> { action(false); }, null);
 

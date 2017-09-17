@@ -94,7 +94,7 @@ public class UserPageFragment extends AbsFragment implements UserPageDataView{
 		if (absActivity!=null) {
 			RepositoriesFragment repositoriesFragment = RepositoriesFragment.newInstance(Bundle.EMPTY);
 			repositoriesFragment.setAbsActivity(absActivity);
-			absActivity.switchFragment(repositoriesFragment);
+			absActivity.switchFragmentAddStack(repositoriesFragment);
 		}
 
 

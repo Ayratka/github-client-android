@@ -29,6 +29,9 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 	LoginDataView loginDataView;
 
 
+	LogIn login;
+
+
 	public LoginPresenter(Context context, @NonNull LoginDataView loginDataView){
 		this.context = context;
 		this.loginDataView = loginDataView;
@@ -48,6 +51,9 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 	@Override
 	public void destroy() {
 
+		if (login!=null)
+			login.dispose();
+		loginDataView = null;
 	}
 
 	@Override
@@ -70,7 +76,7 @@ public class LoginPresenter implements Presenter<LoginDataView> {
 
 		AccessorRepository repository = new AccessorDataRepository(dataStore, AccessorDataMapper.newInstance());
 
-		LogIn login  = new LogIn (repository, AndroidSchedulers.mainThread (), Schedulers.io ());
+		login  = new LogIn (repository, AndroidSchedulers.mainThread (), Schedulers.io ());
 
 		login.execute ( this::action, isBad -> { loginDataView.showMessage (R.string.error_login_or_pass_incorrect); }, null);
 	}

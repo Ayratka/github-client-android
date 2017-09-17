@@ -40,6 +40,9 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 
 	Context context;
 
+	GetUser getUser;
+
+
 	public UserPagePresenter(Context context){
 		this.context  = context;
 	}
@@ -57,6 +60,9 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 	@Override
 	public void destroy() {
 
+		if (getUser!=null)
+			getUser.dispose();
+		userPageDataView = null;
 	}
 
 	@Override
@@ -89,7 +95,8 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
             UserRepository userRepository = new UserDataRepository(userDataStore, new UserDataMapper());
 
 
-            GetUser getUser = new GetUser(userRepository, AndroidSchedulers.mainThread(), Schedulers.computation());
+			getUser  = new GetUser(userRepository, AndroidSchedulers.mainThread(), Schedulers.computation());
+
 
             getUser.execute(user -> {
 
@@ -105,11 +112,7 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 				}
 
 
-            }, t -> {
-
-				t.printStackTrace();
-
-			}, (long) AppNumeric.UNKNOWN);
+            }, Throwable::printStackTrace, (long) AppNumeric.UNKNOWN);
 
 
 

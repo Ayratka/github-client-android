@@ -4,20 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import github.maxat.com.githubclient.Constants;
+
 /**
  * Created by ajrat on 10.09.17.
  */
 
 public class AuthBody {
 
+    private final static String UNIQUE_NAME = "Android Client";
+
+    private final static String GIST = "gist";
+
+    private final static String USER = "user";
+
+    private final static String REPO = "repo";
 
     List<String> scopes;
 
     String note;
 
-	final String client_id = "d91bbf0288ebe87426bb";
+    final String client_id = Constants.oath_client_id;
 
-	final String client_secret = "a2cc73d39039b1347d6a7c91003c7bcea27de1fd";
+    final String client_secret = Constants.oath_client_secret;
 
 
     public void setScopes(String ... args) {
@@ -38,8 +47,8 @@ public class AuthBody {
 
 	public static AuthBody newInstance() {
 		AuthBody authBody = new AuthBody();
-		authBody.setScopes("gist", "user", "repo");
-		authBody.setNote("Android Client");
+		authBody.setScopes(GIST, USER, REPO);
+		authBody.setNote(UNIQUE_NAME);
 		return authBody;
 	}
 }

@@ -32,6 +32,13 @@ public abstract class AbsActivity extends AppCompatActivity implements BaseDataV
 				.commitAllowingStateLoss ();
 	}
 
+	public void switchFragmentAddStack(Fragment fragment){
+		getSupportFragmentManager ().beginTransaction ()
+				.addToBackStack(null)
+				.replace (R.id.container, fragment)
+				.commitAllowingStateLoss ();
+	}
+
 	@Override
 	public AbsActivity getAbsActivity() {
 		return this;

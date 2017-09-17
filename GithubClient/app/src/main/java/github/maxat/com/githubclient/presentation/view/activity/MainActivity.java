@@ -71,11 +71,6 @@ public class MainActivity extends AbsActivity implements MainDataView {
 		mainPresenter.destroy ();
 	}
 
-	@Override
-	public void onAttachFragment(Fragment fragment) {
-		super.onAttachFragment (fragment);
-		mainPresenter.attach (this);
-	}
 
 
 	@Override

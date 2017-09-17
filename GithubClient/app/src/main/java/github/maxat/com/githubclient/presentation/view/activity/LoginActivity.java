@@ -66,11 +66,7 @@ public class LoginActivity extends AbsActivity implements LoginDataView {
 		loginPresenter.destroy ();
 	}
 
-	@Override
-	public void onAttachFragment(Fragment fragment) {
-		super.onAttachFragment (fragment);
-		loginPresenter.attach (this);
-	}
+
 
 
 
