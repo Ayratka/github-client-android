@@ -69,14 +69,8 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 	public void actionLogOut() {
 
 
-		LogOut logOut  = new LogOut(AndroidSchedulers.mainThread(), Schedulers.computation());
-		logOut.execute( isSucess -> {
-
-			AbsActivity absActivity = userPageDataView.getAbsActivity();
-			Navigator.toWebPage(absActivity);
-
-
-		}, Throwable::printStackTrace, null );
+		AbsActivity absActivity = userPageDataView.getAbsActivity();
+		Navigator.toWebPage(absActivity);
 
 
 	}
@@ -124,4 +118,8 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
 
 	}
 
+	public void selfRepositories() {
+
+
+	}
 }

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.google.gson.GsonBuilder;
 
 import github.maxat.com.githubclient.BuildConfig;
+import github.maxat.com.githubclient.Constants;
 import github.maxat.com.githubclient.data.net.auth.AuthInterceptor;
 import github.maxat.com.githubclient.data.net.auth.BasicAuthInterceptor;
 import okhttp3.OkHttpClient;
@@ -19,9 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiService {
 
 
-	private final static String BASE_URL = "https://api.github.com/";
-
-	public final static String  GITHUB_APP = "https://github.com/settings/applications";
+	public final static String ACCESS_TOKEN = "access_token";
 
 
 	public static RestApi create(@NonNull AuthInterceptor authInterceptor)
@@ -39,7 +38,7 @@ public class ApiService {
 		}
 
 		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl(BASE_URL)
+				.baseUrl(Constants.BASE_URL)
 				.addConverterFactory(GsonConverterFactory.create(new GsonBuilder ().serializeNulls().create()))
 				.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 				.client(client)

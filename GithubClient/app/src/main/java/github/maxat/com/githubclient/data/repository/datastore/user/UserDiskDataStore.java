@@ -32,7 +32,7 @@ public class UserDiskDataStore implements UserDataStore {
 	@Override
 	public Observable<UserEntity> readUserEntity() {
 		return accessorCache.get (Collections.emptyList ()).flatMap (entity -> {
-			Specification specification = new BaseSpecification ("id", entity.getId ());
+			Specification specification = new BaseSpecification (UserEntity.FIELD_ID, entity.getId ());
 			return userCache.get (specification);
 		});
 	}

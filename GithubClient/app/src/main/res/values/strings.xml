@@ -7,5 +7,6 @@
     <string name="error_login_or_pass_empty">Login or password is empty</string>
     <string name="error_extract_accessor">Не удалось найти данные пользователя</string>
     <string name="buttion_text_log_out">Выйти</string>
-    <string name="label_public_repo">Публичный репозитории:</string>
+    <string name="label_public_repo">Публичные репозитории:</string>
+    <string name="btn_repositories">Репозитории</string>
 </resources>

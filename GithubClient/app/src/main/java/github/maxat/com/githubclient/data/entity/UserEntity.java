@@ -9,6 +9,7 @@ import io.realm.annotations.PrimaryKey;
  */
 public class UserEntity extends RealmObject implements ICommonAction{
 
+	public final static String FIELD_ID = "id";
 
 
 	@PrimaryKey

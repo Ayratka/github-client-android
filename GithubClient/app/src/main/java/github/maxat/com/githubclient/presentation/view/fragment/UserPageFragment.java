@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,8 @@ public class UserPageFragment extends AbsFragment implements UserPageDataView{
 		super.onCreate (savedInstanceState);
 		userPagePresenter = new UserPagePresenter (getContext());
 		userPagePresenter.attach (this);
+		if (absActivity == null)
+			absActivity = (AbsActivity) getActivity();
 	}
 
 
@@ -65,6 +68,8 @@ public class UserPageFragment extends AbsFragment implements UserPageDataView{
 	@BindView(R.id.tvPublicRepo)
 	TextView tvPublicRepo;
 
+	@BindView(R.id.btnRepositories)
+	AppCompatButton btnRepositories;
 
 
 	@Nullable
@@ -80,8 +85,20 @@ public class UserPageFragment extends AbsFragment implements UserPageDataView{
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated (view, savedInstanceState);
 		userPagePresenter.selfUser();
+		userPagePresenter.selfRepositories();
 	}
 
+	@OnClick(R.id.btnRepositories)
+	public void onClickRepositories(){
+
+		if (absActivity!=null) {
+			RepositoriesFragment repositoriesFragment = RepositoriesFragment.newInstance(Bundle.EMPTY);
+			repositoriesFragment.setAbsActivity(absActivity);
+			absActivity.switchFragment(repositoriesFragment);
+		}
+
+
+	}
 
 	@OnClick(R.id.btnLogOut)
 	public void onClickLogOut(){

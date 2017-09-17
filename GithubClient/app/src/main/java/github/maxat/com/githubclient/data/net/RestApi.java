@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import github.maxat.com.githubclient.data.entity.AccessorEntity;
+import github.maxat.com.githubclient.data.entity.RepositoryEntity;
 import github.maxat.com.githubclient.data.entity.UserEntity;
 import github.maxat.com.githubclient.domain.model.Accessor;
 import retrofit2.http.Body;
@@ -29,7 +30,6 @@ public interface RestApi {
 
 
 
-
 	@POST("authorizations")
 	Observable<AccessorEntity> getAccessorEntity(@QueryMap Map<String, String> options, @Body AuthBody authBody);
 
@@ -37,6 +37,12 @@ public interface RestApi {
 	@GET("user")
 	Observable<UserEntity> getUser(@QueryMap Map<String, String> options);
 
+
+	@GET("user/repos")
+	Observable<List<RepositoryEntity>> getOwnRepositories(@QueryMap Map<String, String> options);
+
+	@GET("users/{username}/repos")
+	Observable<List<RepositoryEntity>> getUserRepositories(@Path("username") String user_name, @QueryMap Map<String, String> options);
 
 
 }
