@@ -95,7 +95,7 @@ public class UserPagePresenter implements Presenter<UserPageDataView> {
             UserRepository userRepository = new UserDataRepository(userDataStore, new UserDataMapper());
 
 
-			getUser  = new GetUser(userRepository, AndroidSchedulers.mainThread(), Schedulers.computation());
+			getUser  = new GetUser(userRepository, AndroidSchedulers.mainThread(), Schedulers.io());
 
 
             getUser.execute(user -> {
